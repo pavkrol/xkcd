@@ -5,12 +5,15 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import Header from "./components/Header";
 import ComicListItem from "./components/ComicListItem";
+import ComicFullScreen from "./components/ComicFullScreen";
 
 class App extends Component {
   state = {
     comics: [],
-    isLoading: true,
-    fontLoaded: false
+    comicsLoaded: false,
+    fontLoaded: false,
+    isComicChosen: false,
+    currentImage: ""
   };
 
   fetchFonts = () => {
@@ -27,15 +30,31 @@ class App extends Component {
       const singleComic = await response.json();
       this.setState({ comics: [...this.state.comics, singleComic] });
     }
+    this.setState({ comics: this.state.comics.reverse() });
   };
 
-  componentDidMount() {
-    this.fetchComics();
-    this.setState({ isLoading: false });
+  chooseComic = imageSrc => {
+    this.setState({ currentImage: imageSrc });
+    this.setState({ isComicChosen: true });
+  };
+
+  goBack = () => {
+    this.setState({ isComicChosen: false });
+  };
+
+  async componentDidMount() {
+    await this.fetchComics();
+    this.setState({ comicsLoaded: true });
   }
 
   render() {
-    const { isLoading, comics, fontLoaded } = this.state;
+    const {
+      comicsLoaded,
+      comics,
+      fontLoaded,
+      currentImage,
+      isComicChosen
+    } = this.state;
 
     if (!fontLoaded) {
       return (
@@ -45,16 +64,23 @@ class App extends Component {
         />
       );
     }
+
     return (
       <AppWrapper>
-        <Header />
+        <Header isComicChosen={isComicChosen} goBack={this.goBack} />
         <ListWrapper>
-          {isLoading ? (
+          {!comicsLoaded ? (
             <ActivityIndicator size="large" color="#000000" />
+          ) : !isComicChosen ? (
+            comics.map((item, index) => (
+              <ComicListItem
+                key={index}
+                comic={item}
+                chooseComic={this.chooseComic}
+              />
+            ))
           ) : (
-            comics
-              .reverse()
-              .map((item, index) => <ComicListItem key={index} comic={item} />)
+            <ComicFullScreen imageSrc={currentImage} />
           )}
         </ListWrapper>
       </AppWrapper>

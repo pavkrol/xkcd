@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { TouchableOpacity } from "react-native";
 
-const ComicListItem = ({ comic }) => {
+const ComicListItem = ({ comic, chooseComic }) => {
   return (
-    <ComicListItemWrapper>
-      <AsideWrapper>
-        <Date>{`${comic.day}/${comic.month}/${comic.year}`}</Date>
-        <Title>{comic.title}</Title>
-      </AsideWrapper>
-      <Thumbnail source={{ uri: comic.img }} resizeMode="contain" />
-    </ComicListItemWrapper>
+    <TouchableOpacity onPress={() => chooseComic(comic.img)}>
+      <ComicListItemWrapper>
+        <AsideWrapper>
+          <Date>{`${comic.day}/${comic.month}/${comic.year}`}</Date>
+          <Title>{comic.title}</Title>
+        </AsideWrapper>
+        <Thumbnail source={{ uri: comic.img }} resizeMode="contain" />
+      </ComicListItemWrapper>
+    </TouchableOpacity>
   );
 };
 
