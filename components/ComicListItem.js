@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native";
 
 const ComicListItem = ({ comic, chooseComic }) => {
   return (
-    <TouchableOpacity onPress={() => chooseComic(comic.img)}>
+    <TouchableOpacity onPress={() => chooseComic(comic)}>
       <ComicListItemWrapper>
         <AsideWrapper>
           <Date>{`${comic.day}/${comic.month}/${comic.year}`}</Date>
