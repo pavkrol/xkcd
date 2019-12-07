@@ -23,7 +23,7 @@ const About = () => {
 
 export default About;
 
-const AboutWrapper = styled.View`
+const AboutWrapper = styled.ScrollView`
   flex: 1;
   background-color: #e9ddcb;
 `;
@@ -32,5 +32,5 @@ const Paragraph = styled.Text`
   font-family: "lato";
   padding: 30px 30px 15px 30px;
   font-size: 22px;
-  line-height: 30px;
+  line-height: 36px;
 `;

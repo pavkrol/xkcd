@@ -17,13 +17,14 @@ const DescriptionWrapper = styled.View`
   border-color: #000;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  min-height: 100px;
 `;
 
 const Content = styled.Text`
   padding: 15px;
   text-align: center;
   font-family: "bangers";
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 2px;
+  line-height: 25px;
 `;

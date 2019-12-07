@@ -6,15 +6,18 @@ const MenuList = ({ navigation }) => {
   data = [
     {
       title: "what's xkcd?",
-      target: "About"
+      target: "About",
+      type: "internal"
     },
     {
       title: "recent comics",
-      target: "ComicList"
+      target: "ComicList",
+      type: "internal"
     },
     {
-      title: "author's website?",
-      target: "About"
+      title: "author's website",
+      target: "https://xkcd.com",
+      type: "external"
     }
   ];
 
@@ -26,6 +29,7 @@ const MenuList = ({ navigation }) => {
           title={item.title}
           target={item.target}
           navigation={navigation}
+          type={item.type}
         />
       ))}
     </MenuListWrapper>

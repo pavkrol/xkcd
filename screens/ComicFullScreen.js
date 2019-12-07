@@ -21,7 +21,7 @@ const ComicFullScreen = ({ navigation }) => {
 
 export default ComicFullScreen;
 
-const ComicFullScreenWrapper = styled.View`
+const ComicFullScreenWrapper = styled.ScrollView`
   flex: 1;
   background-color: #e9ddcb;
 `;

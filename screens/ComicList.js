@@ -1,22 +1,41 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { ActivityIndicator } from "react-native";
+import styled, { css } from "styled-components";
+import { ActivityIndicator, RefreshControl, Platform } from "react-native";
 import ComicListItem from "../components/ComicListItem";
 import Header from "../components/Header";
 
 class ComicList extends Component {
   state = {
     comics: [],
-    comicsLoaded: false
+    comicsLoaded: false,
+    refreshing: false
+  };
+
+  wait = timeout => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  };
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.wait(1000).then(() => {
+      this.fetchComics();
+      this.setState({ refreshing: false });
+    });
   };
 
   fetchComics = async () => {
-    const resp = await fetch("http://xkcd.com/info.0.json");
-    const data = await resp.json();
-    for (let i = data.num - 7; i <= data.num; i++) {
-      const response = await fetch(`http://xkcd.com/${i}/info.0.json`);
-      const singleComic = await response.json();
-      this.setState({ comics: [...this.state.comics, singleComic] });
+    try {
+      const resp = await fetch("http://xkcd.com/info.0.json");
+      const data = await resp.json();
+      for (let i = data.num - 7; i <= data.num; i++) {
+        const response = await fetch(`http://xkcd.com/${i}/info.0.json`);
+        const singleComic = await response.json();
+        this.setState({ comics: [...this.state.comics, singleComic] });
+      }
+    } catch (error) {
+      console.error(error);
     }
     this.setState({ comics: this.state.comics.reverse() });
   };
@@ -31,12 +50,19 @@ class ComicList extends Component {
   }
 
   render() {
-    const { comicsLoaded, comics } = this.state;
+    const { comicsLoaded, comics, refreshing } = this.state;
 
     return (
-      <AppWrapper>
+      <ComicListWrapper>
         <Header content="recent comics" />
-        <ListWrapper>
+        <ListWrapper
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+        >
           {!comicsLoaded ? (
             <ActivityIndicator size="large" color="#000000" />
           ) : (
@@ -49,18 +75,25 @@ class ComicList extends Component {
             ))
           )}
         </ListWrapper>
-      </AppWrapper>
+      </ComicListWrapper>
     );
   }
 }
 
 export default ComicList;
 
-const AppWrapper = styled.View`
+const ComicListWrapper = styled.View`
   background-color: #e9ddcb;
   flex: 1;
 `;
 
 const ListWrapper = styled.ScrollView`
-  padding: 30px;
+  ${Platform.select({
+    ios: css`
+      padding: 30px;
+    `,
+    android: css`
+      margin: 30px;
+    `
+  })};
 `;

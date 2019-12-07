@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Linking } from "expo";
 
-const MenuItem = ({ title, target, navigation }) => {
+const MenuItem = ({ title, target, navigation, type }) => {
   return (
-    <MenuItemWrapper onPress={() => navigation.navigate(target)}>
+    <MenuItemWrapper
+      onPress={() =>
+        type === "internal"
+          ? navigation.navigate(target)
+          : Linking.openURL(target)
+      }
+    >
       <Content>{title}</Content>
     </MenuItemWrapper>
   );
@@ -20,7 +27,7 @@ const Content = styled.Text`
 
 const MenuItemWrapper = styled.TouchableOpacity`
   height: 80px;
-  width: 50%;
+  width: 80%;
   justify-content: center;
   align-items: center;
 `;

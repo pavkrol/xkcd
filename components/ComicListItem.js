@@ -24,6 +24,7 @@ const ComicListItemWrapper = styled.View`
   flex-wrap: wrap;
   border: 2px solid #000;
   padding: 10px;
+  width: 100%;
 `;
 
 const AsideWrapper = styled.View`
