@@ -1,8 +1,9 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import Home from "./Home";
-import ComicList from "./ComicList";
-import ComicFullScreen from "./ComicFullScreen";
+import Home from "../screens/Home";
+import ComicList from "../screens/ComicList";
+import ComicFullScreen from "../screens/ComicFullScreen";
+import About from "../screens/About";
 
 const Navigation = createStackNavigator({
   Home: {
@@ -14,7 +15,7 @@ const Navigation = createStackNavigator({
   ComicList: {
     screen: ComicList,
     navigationOptions: {
-      headerTitle: "Recent Comics List"
+      headerTitle: "Recent Comics"
     }
   },
   ComicFullScreen: {
@@ -22,6 +23,12 @@ const Navigation = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTitle: navigation.getParam("comic", {}).title
     })
+  },
+  About: {
+    screen: About,
+    navigationOptions: {
+      headerTitle: "About xkcd"
+    }
   }
 });
 

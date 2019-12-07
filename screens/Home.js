@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Button } from "react-native";
-import Header from "./Header";
+import Header from "../components/Header";
+import MenuList from "../components/MenuList";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
@@ -9,7 +10,8 @@ const Home = ({ navigation }) => {
 
   const fetchFonts = () => {
     return Font.loadAsync({
-      bangers: require("../assets/fonts/Bangers-Regular.ttf")
+      bangers: require("../assets/fonts/Bangers-Regular.ttf"),
+      lato: require("../assets/fonts/Lato-Regular.ttf")
     });
   };
 
@@ -24,11 +26,8 @@ const Home = ({ navigation }) => {
 
   return (
     <View>
-      <Header />
-      <Button
-        title="go to list"
-        onPress={() => navigation.navigate("ComicList")}
-      />
+      <Header content="xkcd" />
+      <MenuList navigation={navigation} />
     </View>
   );
 };

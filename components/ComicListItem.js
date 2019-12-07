@@ -22,7 +22,7 @@ const ComicListItemWrapper = styled.View`
   margin-bottom: 25;
   height: 200;
   flex-wrap: wrap;
-  border: 1px solid #000;
+  border: 2px solid #000;
   padding: 10px;
 `;
 

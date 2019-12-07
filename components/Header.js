@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Header = () => {
+const Header = ({ content }) => {
   return (
     <HeaderWrapper>
-      <Content>xkcd</Content>
+      <Content>{content}</Content>
     </HeaderWrapper>
   );
 };
@@ -18,12 +18,17 @@ const HeaderWrapper = styled.View`
   width: 100%;
   height: 70px;
   position: relative;
+  border-top-width: 2;
+  border-top-color: #000;
+  border-bottom-width: 2;
+  border-bottom-color: #000;
 `;
 
 const Content = styled.Text`
   font-family: "bangers";
   font-size: 40px;
   letter-spacing: 2px;
-  width: 50%;
+  width: 100%;
   text-align: center;
+  text-shadow: 3px 3px 0px rgba(40, 40, 40, 0.37);
 `;

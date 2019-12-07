@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { ActivityIndicator } from "react-native";
-import ComicListItem from "./ComicListItem";
+import ComicListItem from "../components/ComicListItem";
+import Header from "../components/Header";
 
 class ComicList extends Component {
   state = {
@@ -34,6 +35,7 @@ class ComicList extends Component {
 
     return (
       <AppWrapper>
+        <Header content="recent comics" />
         <ListWrapper>
           {!comicsLoaded ? (
             <ActivityIndicator size="large" color="#000000" />
