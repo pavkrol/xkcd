@@ -1,25 +1,26 @@
-# Yahtzee | Dice Game
+# XKCD
 
-This app is my version of popular dice game - Yahtzee. Application was created only for learning purposes.
+Xkcd is a simple application created in React Native, which allows to fetch and display few of the latest comics from xkcd.com. Application was created only for learning purposes.
 
 ## Installation
 
-Use the package manager npm to install the Yahtzee app.
+Use the package manager npm to install the app.
 
 ```bash
 npm install
 ```
 
-## Live version
+You will also need a mobile app to be able to display application on your mobile phone from [EXPO Client](https://expo.io/tools/#client).
 
-The live version of the game: [Yahtzee | Dice Game](https://yahtzee-dice-game.netlify.com/)
+## Expo published version
+
+The application is published at expo: [XKCD](https://expo.io/@pavkrol/xkcd)
 
 ## Built With
 
-- React
+- React Native
+- Expo
 - Styled Components
-- Reach Router
-- Webpack
 
 ## Contributing
 
